@@ -8,10 +8,12 @@ import './App.css';
 
 function App() {
   const [prompt, setGamePrompt] = useState("Start");
+  let [startGame, setGameStart] = useState(false)
   const [playerChoice, setPlayerChoice] = useState(null);
   const [computerChoice, setComputerChoice] = useState(null);
   const [previousWinner, setPreviousWinner] = useState(null);
   const [gameHistory, setGameHistory] = useState([]);
+  
 
 
   const onPlayerChoose = playerChoice => {
@@ -32,8 +34,17 @@ function App() {
     gameHistory.push(result);   //???Push the result of each round into our gameHistory array.
 
     setGameHistory(gameHistory);
+    
   };
 
+if (!startGame){
+  return <button
+  className="btn btn-success btn-lg"
+  onClick={() => {setGameStart(true)}}
+>
+Start
+</button>
+}
 
   return (
     <div className="App">
@@ -55,10 +66,12 @@ function App() {
             />
           </div>
           <div className="col-md-4 themed-grid-col">
+            
             <h3>History</h3>
             <ul>
               {gameHistory.map(result => {
                 return <li>{result}</li>;
+
               })}
             </ul>
           </div>
